@@ -19,8 +19,7 @@ The procedure is as follows
         authorsfile = .git/usermap
 ````
 
-- copy the file `usermap` included in this branch into the `.git` 
-  directory
+- create a `usermap` or ask us for the one we use, put it into .git
 - create the directory `.git/svn/refs/remotes/git-svn/`, including all parents 
 - copy the `index` file included in this branch into the above directory
 - copy the file `git-svn` into `.git/refs/remotes/`
