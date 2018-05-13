@@ -2297,7 +2297,7 @@ WARNING1 ("invalid value (expected 0 or 1) for environment variable $FORCE_SOURC
   }
 }
 
-#if defined(pdfTeX) || defined(epTeX) || defined(eupTeX)
+#if defined(pdfTeX) || defined(epTeX) || defined(eupTeX) || defined(XeTeX)
 /*
  Getting a high resolution time.
  */
@@ -2985,8 +2985,6 @@ void pdftex_fail(const char *fmt, ...)
 }
 #endif /* not pdfTeX */
 
-#if !defined(XeTeX)
-
 #define TIME_STR_SIZE 30
 char start_time_str[TIME_STR_SIZE];
 static char time_str[TIME_STR_SIZE];
@@ -3056,6 +3054,8 @@ void initstarttime(void)
         }
     }
 }
+
+#if !defined(XeTeX)
 
 char *makecstring(integer s)
 {
