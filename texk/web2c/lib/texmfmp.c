@@ -3055,8 +3055,6 @@ void initstarttime(void)
     }
 }
 
-#if !defined(XeTeX)
-
 char *makecstring(integer s)
 {
     static char *cstrbuf = NULL;
@@ -3243,7 +3241,6 @@ void getfiledump(integer s, int offset, int length)
     }
     xfree(file_name);
 }
-#endif /* not XeTeX */
 
 /* Converts any given string in into an allowed PDF string which is
  * hexadecimal encoded;
