@@ -1,61 +1,119 @@
 START
-test 1
+EXPANDED TEST 1
 > \expanded=\expanded.
-l.19 \show\expanded
+l.13 \show\expanded
                    
 
-test 2
+EXPANDED TEST 2
 > \ccc=macro:
 ->xx,x.
-l.26 \show\ccc
+l.20 \show\ccc
               
 
-test 3
+EXPANDED TEST 3: the
 xx,123
-test 4
+EXPANDED TEST 4: macro param
 > \ddd=macro:
 #1->#1.
-l.35 \show\ddd
+l.29 \show\ddd
               
 
-test 5
-> #,\aaa ,\aaa .
-l.40 ...panded{#,\noexpand\aaa,\unexpanded{\aaa}}}
+EXPANDED TEST 5: torture
+> ##,\aaa ,\aaa .
+l.34 ...panded{#,\noexpand\aaa,\unexpanded{\aaa}}}
                                                   
 
-> #,#.
-l.41 ...s\expandafter{\expanded{#,\unexpanded{#}}}
+> ##,##.
+l.35 ...s\expandafter{\expanded{#,\unexpanded{#}}}
                                                   
 
 > \aaa .
-l.42 ...fter{\expanded\expandafter{\noexpand\aaa}}
+l.36 ...fter{\expanded\expandafter{\noexpand\aaa}}
                                                   
 
 > x.
-l.43 ...{\expanded\expandafter{\unexpanded{\aaa}}}
+l.37 ...{\expanded\expandafter{\unexpanded{\aaa}}}
                                                   
 
 > xx\aaa .
 <inserted text> {xx\aaa }
                          
-l.44 ...pand\aaa\noexpand\noexpand\noexpand\aaa}}}
+l.38 ...pand\aaa\noexpand\noexpand\noexpand\aaa}}}
                                                   
 
 > \aaa .
 <inserted text> {\aaa }
                        
-l.46 \showtokens\expanded{{\the\toks0}}
+l.40 \showtokens\expanded{{\the\toks0}}
                                        
 
 > \egroup=end-group character }.
 <inserted text> \show \egroup 
                               
-l.47 \expanded\bgroup\show\egroup}
+l.41 \expanded\bgroup\show\egroup}
                                   
 
 > \foo=macro:
 ->##.
-l.49 \show\foo
+l.43 \show\foo
               
 
+RNG TEST 1
+> \setrandomseed=\setrandomseed.
+l.52 \show\setrandomseed
+                           
+
+> \randomseed=\randomseed.
+l.53 \show\randomseed
+                        
+
+> \normaldeviate=\normaldeviate.
+l.54 \show\normaldeviate
+                           
+
+> \uniformdeviate=\uniformdeviate.
+l.55 \show\uniformdeviate
+                            
+
+RNG TEST 2: normaldeviate
+> \normaldeviate=\normaldeviate.
+l.62 \show\normaldeviate
+                           
+
+> \rval=macro:
+->-26025100.
+l.66 \show\rval
+               
+
+RNG TEST 2: uniformdeviate
+1000
+good good
+2
+good good
+FILE TEST 1: filedump
+68656C6C6F20776F726C
+FILE TEST 2: filemoddate
+good
+FILE TEST 3: filesize
+12
+FILE TEST 4: mdfivesum
+6F5902AC237024BDD0C176CB93063DC4
+TIME TEST 2
+> \resettimer=\resettimer.
+l.96 \show\resettimer
+                        
+
+> \elapsedtime=\elapsedtime.
+l.97 \show\elapsedtime
+                         
+
+TIME TEST 2
+good good
+CREATIONDATE TEST 1
+> \creationdate=\creationdate.
+l.115 \show\creationdate
+                           
+
+CREATIONDATE TEST 2: non empty
+CREATIONDATE TEST 3: format D:..+..
 END

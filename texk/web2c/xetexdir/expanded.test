@@ -7,15 +7,17 @@
 # uses same base result as pdftex
 
 TEXMFCNF="$srcdir/../kpathsea"
-TEXINPUTS="$srcdir/pdftexdir/tests:."
+TEXINPUTS="$srcdir/xetexdir/tests:."
 
 
-export TEXMFCNF TEXINPUTS 
+export TEXMFCNF TEXINPUTS
 
-
-./xetex -ini -etex expanded.tex 
-sed -n '/START/,/END/p' expanded.log > expanded_xetex.log || exit 1
-
+sed  -e "s/pdf//g" "$srcdir/pdftexdir/tests/expanded.tex" > expanded.tex
+echo "$srcdir/pdftexdir/tests/expanded.tex" > ~/zecho.txt
+cp "$srcdir/pdftexdir/tests/ftest.txt" .
+./xetex -ini -etex --interaction batchmode expanded.tex  < /dev/null
+sed -n  -e '/START/,/END/p'  expanded.log > expanded_xetex.log || exit 1
+diff "$srcdir/pdftexdir/tests/expanded.txt"  expanded_xetex.log > ~/x.diff
 diff "$srcdir/pdftexdir/tests/expanded.txt"  expanded_xetex.log || exit 1
 
 exit 0

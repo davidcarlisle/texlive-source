@@ -11,8 +11,8 @@ TEXINPUTS="$srcdir/pdftexdir/tests:."
 export TEXMFCNF TEXINPUTS 
 
 
-./pdftex -ini -etex expanded.tex 
-sed -n '/START/,/END/p' expanded.log > expanded_pdftex.log || exit 1
+./pdftex -ini -etex --interaction batchmode expanded.tex 
+sed -n -e 's/[\\]pdf/\\/g' -e '/START/,/END/p' expanded.log > expanded_pdftex.log || exit 1
 
 diff "$srcdir/pdftexdir/tests/expanded.txt"  expanded_pdftex.log || exit 1
 

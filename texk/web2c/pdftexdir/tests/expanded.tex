@@ -1,40 +1,34 @@
 
 \catcode`\{=1
 \catcode`\}=2
-
-\catcode`\#=4
-
+\catcode`\#=6
+\def\typ#1{\immediate\write-1 {#1}}
 \def\space{ }
 \let\bgroup{
 \let\egroup}
 
-\batchmode
-
-\def\typ{\immediate\write-1 }
-
 \typ{START}
-
-\typ{test 1}
+\typ{EXPANDED TEST 1}
 % Check the primitmive exists
 \show\expanded
 
-\typ{test 2}
+\typ{EXPANDED TEST 2}
 % Simple expansion test
 \def\aaa{x}
 \def\bbb{\aaa\aaa}
 \expandafter\def\expandafter\ccc\expandafter{\expanded{\bbb,\aaa}}
 \show\ccc
 
-\typ{test 3}
+\typ{EXPANDED TEST 3: the}
 % Expanding \the
 \typ{\expanded{\bbb,\the\numexpr100+20+3\relax}}
 
-\typ{test 4}
+\typ{EXPANDED TEST 4: macro param}
 % Constructed #1 is still #1
 \expandafter\def\expandafter\ddd\expandafter#\expanded{1{#\number--1}}
 \show\ddd
 
-\typ{test 5}
+\typ{EXPANDED TEST 5: torture}
 % Torture test from Bruno Le Floch testing various tricky interactions
 \expanded\relax\space\ifincsname \BOOM\fi{\ifincsname \BOOM\fi}
 \showtokens\expandafter{\expanded{#,\noexpand\aaa,\unexpanded{\aaa}}}
@@ -50,5 +44,83 @@
 
 
 
+
+
+
+
+\typ{RNG TEST 1}
+\show\pdfsetrandomseed
+\show\pdfrandomseed
+\show\pdfnormaldeviate
+\show\pdfuniformdeviate
+
+\typ{RNG TEST 2: normaldeviate}
+
+\pdfsetrandomseed 123456789
+
+
+\show\pdfnormaldeviate
+
+\edef\rval{\pdfnormaldeviate 100}
+
+\show\rval
+
+
+\typ{RNG TEST 2: uniformdeviate}
+{
+\count0=-1
+\typ{1000}
+\count0=\pdfuniformdeviate 1000
+\message{\ifnum\count0<0 negative\else good\fi}
+\message{\ifnum\count0<1000 good\else bad\fi}
+\typ{2}
+\count0=\pdfuniformdeviate 2
+\message{\ifnum\count0<0 negative\else good\fi}
+\message{\ifnum\count0<2 good\else bad\fi}
+}
+
+\typ{FILE TEST 1: filedump}
+\message{\pdffiledump length 10 {ftest.txt}}
+
+\typ{FILE TEST 2: filemoddate}
+\message{\if !\pdffilemoddate {ftest.txt}!empty date\else good\fi}
+
+\typ{FILE TEST 3: filesize}
+\message{\pdffilesize {ftest.txt}}
+
+\typ{FILE TEST 4: mdfivesum}
+\message{\pdfmdfivesum file {ftest.txt}}
+
+
+\typ{TIME TEST 2}
+\show\pdfresettimer
+\show\pdfelapsedtime
+
+\typ{TIME TEST 2}
+{
+\count0=-1
+\count0=\pdfelapsedtime
+\message{\ifnum\count0=-1 bad\else good\fi}
+
+\pdfresettimer
+
+\count2=-1
+\count2=\pdfelapsedtime
+\message{\ifnum\count2<\count0  good\else bad\fi}
+
+}
+
+
+\typ{CREATIONDATE TEST 1}
+\show\pdfcreationdate
+
+\typ{CREATIONDATE TEST 2: non empty}
+% \typ{\if!\pdfcreationdate! empty date\else good\fi}
+
+\typ{CREATIONDATE TEST 3: format D:..+..}
+{\catcode`D=12
+\def\tmp #1D:#2+#3\relax{good}
+% \typ{\expandafter\tmp\pdfcreationdate\relax}
+}
 \typ{END}
 \end
