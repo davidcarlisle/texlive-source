@@ -115,5 +115,7 @@ l.115 \show\creationdate
                            
 
 CREATIONDATE TEST 2: non empty
+good
 CREATIONDATE TEST 3: format D:..+..
+good
 END

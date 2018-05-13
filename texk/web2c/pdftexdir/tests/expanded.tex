@@ -115,12 +115,12 @@
 \show\pdfcreationdate
 
 \typ{CREATIONDATE TEST 2: non empty}
-% \typ{\if!\pdfcreationdate! empty date\else good\fi}
+\typ{\if!\pdfcreationdate! empty date\else good\fi}
 
 \typ{CREATIONDATE TEST 3: format D:..+..}
 {\catcode`D=12
 \def\tmp #1D:#2+#3\relax{good}
-% \typ{\expandafter\tmp\pdfcreationdate\relax}
+\typ{\expandafter\tmp\pdfcreationdate\relax}
 }
 \typ{END}
 \end
