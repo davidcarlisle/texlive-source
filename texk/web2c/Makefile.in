@@ -2420,6 +2420,7 @@ EXTRA_DIST = PROJECTS cftests cpascal.h help.h w2c/config.h \
 	$(pdftex_ch_srcs) pdftexdir/pdftex.defines pdftexdir/ChangeLog \
 	pdftexdir/NEWS pdftexdir/README pdftexdir/change-files.txt \
 	$(pdftex_tests) tests/wprob.tex pdftexdir/tests/pdfimage.tex \
+	pdftexdir/tests/expanded.tex\
 	tests/1-4.jpg tests/B.pdf tests/basic.tex \
 	tests/lily-ledger-broken.png $(ttf2afm_tests) \
 	pdftexdir/tests/postV3.afm pdftexdir/tests/postV3.ttf \
@@ -2427,6 +2428,7 @@ EXTRA_DIST = PROJECTS cftests cpascal.h help.h w2c/config.h \
 	$(pdftosrc_tests) pdftexdir/tests/test-13.pdf \
 	pdftexdir/tests/test-13.xref pdftexdir/tests/test-15.pdf \
 	pdftexdir/tests/test-15.xref $(libluasocket_sources) \
+	pdftexdir/tests/expanded.txt\
 	luatexdir/luasocket/src/ftp_lua.c \
 	luatexdir/luasocket/src/headers_lua.c \
 	luatexdir/luasocket/src/http_lua.c \
@@ -3189,6 +3191,7 @@ eptex_ch_srcs = \
 	$(eptex_ch_synctex) \
 	eptexdir/fam256.ch \
 	eptexdir/pdfutils.ch \
+	eptexdir/expanded.ch \
 	tex-binpool.ch
 
 
@@ -3298,6 +3301,7 @@ euptex_ch_srcs = \
 	euptexdir/pdfstrcmp-eup-pre.ch \
 	eptexdir/pdfutils.ch \
 	euptexdir/pdfstrcmp-eup-post.ch \
+	eptexdir/expanded.ch \
 	tex-binpool.ch
 
 
@@ -3359,7 +3363,7 @@ pdftex_ch_srcs = \
 
 # pdfTeX Tests
 #
-pdftex_tests = pdftexdir/wprob.test pdftexdir/pdftex.test pdftexdir/pdfimage.test
+pdftex_tests = pdftexdir/wprob.test pdftexdir/pdftex.test pdftexdir/pdfimage.test pdftexdir/expanded.test
 ttf2afm_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/pdftexdir
 ttf2afm_SOURCES = pdftexdir/ttf2afm.c
 ttf2afm_DEPENDENCIES = $(default_dependencies)
@@ -3909,6 +3913,7 @@ libxetex_prereq = xetexd.h $(xetex_dependencies)
 # XeTeX Tests
 #
 xetex_tests = \
+	xetexdir/expanded.test \
 	xetexdir/xetex-bug73.test \
 	xetexdir/xetex.test
 

@@ -1,0 +1,54 @@
+
+\catcode`\{=1
+\catcode`\}=2
+
+\catcode`\#=4
+
+\def\space{ }
+\let\bgroup{
+\let\egroup}
+
+\batchmode
+
+\def\typ{\immediate\write-1 }
+
+\typ{START}
+
+\typ{test 1}
+% Check the primitmive exists
+\show\expanded
+
+\typ{test 2}
+% Simple expansion test
+\def\aaa{x}
+\def\bbb{\aaa\aaa}
+\expandafter\def\expandafter\ccc\expandafter{\expanded{\bbb,\aaa}}
+\show\ccc
+
+\typ{test 3}
+% Expanding \the
+\typ{\expanded{\bbb,\the\numexpr100+20+3\relax}}
+
+\typ{test 4}
+% Constructed #1 is still #1
+\expandafter\def\expandafter\ddd\expandafter#\expanded{1{#\number--1}}
+\show\ddd
+
+\typ{test 5}
+% Torture test from Bruno Le Floch testing various tricky interactions
+\expanded\relax\space\ifincsname \BOOM\fi{\ifincsname \BOOM\fi}
+\showtokens\expandafter{\expanded{#,\noexpand\aaa,\unexpanded{\aaa}}}
+\showtokens\expandafter{\expanded{#,\unexpanded{#}}}
+\showtokens\expandafter{\expanded\expandafter{\noexpand\aaa}}
+\showtokens\expandafter{\expanded\expandafter{\unexpanded{\aaa}}}
+\showtokens\expanded{{\expanded{\aaa\noexpand\aaa\noexpand\noexpand\noexpand\aaa}}}
+\toks0{\aaa}
+\showtokens\expanded{{\the\toks0}}
+\expanded\bgroup\show\egroup}
+\edef\foo{\expanded{##}}
+\show\foo
+
+
+
+\typ{END}
+\end

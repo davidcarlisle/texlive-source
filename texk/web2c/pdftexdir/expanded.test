@@ -1,0 +1,20 @@
+#! /bin/sh -vx
+# $Id$
+# Public domain
+# You may freely use, modify and/or distribute this file.
+# David Carlisle: version for \expanded based on existing test scripts by Peter Breitenlohner and Karl Berry
+
+TEXMFCNF="$srcdir/../kpathsea"
+TEXINPUTS="$srcdir/pdftexdir/tests:."
+
+
+export TEXMFCNF TEXINPUTS 
+
+
+./pdftex -ini -etex expanded.tex 
+sed -n '/START/,/END/p' expanded.log > expanded_pdftex.log || exit 1
+
+diff "$srcdir/pdftexdir/tests/expanded.txt"  expanded_pdftex.log || exit 1
+
+exit 0
+
